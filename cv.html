@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekta Pandey - Resume</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.5;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 50%, #34495e 100%);
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* ── Floating particles background ── */
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    animation: float linear infinite;
+  }
+  @keyframes float {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── Button bar ── */
+  .button-container {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+    animation: slideDown 0.6s ease both;
+  }
+  @keyframes slideDown { from { opacity:0; transform:translateY(-30px); } to { opacity:1; transform:translateY(0); } }
+
+  .download-btn {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    color: white;
+    padding: 14px 40px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    letter-spacing: 0.5px;
+  }
+  .download-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 30px rgba(0,0,0,0.4); background: linear-gradient(135deg, #2c3e50, #1a252f); }
+
+  /* ── Main card ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(255,255,255,0.97);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border-radius: 16px;
+    position: relative;
+    z-index: 5;
+    animation: cardEntrance 0.8s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes cardEntrance { from { opacity:0; transform:translateY(40px) scale(0.97); } to { opacity:1; transform:none; } }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #34495e;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; bottom: 0; left: -100%;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, #34495e, #5d6d7e, #34495e, transparent);
+    animation: shimmer 3s ease infinite;
+  }
+  @keyframes shimmer { 0%,100% { left: -100%; } 50% { left: 100%; } }
+
+  .header h1 {
+    font-size: clamp(24px, 5vw, 36px);
+    color: #2c3e50;
+    font-weight: 800;
+    letter-spacing: 3px;
+    animation: nameReveal 1s ease 0.3s both;
+    background: linear-gradient(135deg, #2c3e50, #5d6d7e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  @keyframes nameReveal { from { opacity:0; letter-spacing:10px; } to { opacity:1; letter-spacing:3px; } }
+
+  .tagline {
+    font-size: 12px;
+    color: #7f8c8d;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease 0.6s both;
+  }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  .contact-info {
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    animation: fadeIn 1s ease 0.8s both;
+  }
+  .contact-info a { color: #34495e; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .contact-info a:hover { color: #2980b9; }
+
+  /* ── Sections ── */
+  .section {
+    margin-bottom: 22px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .section.visible { opacity: 1; transform: none; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #34495e, #5d6d7e);
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    border-radius: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-title::after {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: sectionShine 4s ease infinite;
+  }
+  @keyframes sectionShine { 0%,100% { left:-100%; } 50% { left:150%; } }
+
+  /* ── Content items ── */
+  .objective { font-size: 12px; line-height: 1.7; text-align: justify; color: #444; }
+
+  .education-item, .experience-item, .project-item { margin-bottom: 14px; font-size: 12px; }
+
+  .degree-title, .job-title { font-weight: bold; color: #2c3e50; margin-bottom: 2px; font-size: 13px; }
+  .college-name { font-weight: 500; color: #555; }
+  .company-name { font-weight: 600; color: #34495e; }
+  .date { color: #7f8c8d; font-style: italic; font-size: 11px; margin-top: 2px; }
+
+  .description, .project-desc {
+    margin-top: 6px;
+    margin-left: 12px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  /* ── Skills ── */
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    font-size: 11px;
+  }
+  .skill-item {
+    background: linear-gradient(135deg, #ecf0f1, #dde4e6);
+    color: #2c3e50;
+    padding: 8px 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    border-left: 3px solid #34495e;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-item::before {
+    content: '';
+    position: absolute; top:0; left:-100%;
+    width:100%; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(52,73,94,0.1), transparent);
+    transition: left 0.4s;
+  }
+  .skill-item:hover::before { left: 100%; }
+  .skill-item:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 12px rgba(52,73,94,0.2); background: linear-gradient(135deg, #34495e, #5d6d7e); color: white; border-left-color: white; }
+
+  /* ── Projects ── */
+  .project-title { font-weight: bold; color: #2c3e50; margin-bottom: 4px; font-size: 12px; }
+
+  /* ── Certs ── */
+  .cert-item { font-size: 11px; margin-bottom: 6px; margin-left: 12px; color: #555; padding-left: 4px; }
+  .cert-item::before { content: "✓ "; color: #27ae60; font-weight: bold; }
+
+  /* ── Experience item hover ── */
+  .experience-item, .education-item, .project-item {
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s;
+  }
+  .experience-item:hover, .education-item:hover, .project-item:hover {
+    background: #f8f9fa;
+    border-left-color: #34495e;
+    transform: translateX(4px);
+    box-shadow: 2px 0 12px rgba(52,73,94,0.08);
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { padding:0; background: white; }
+    #particles, .button-container { display:none; }
+    .container { box-shadow:none; border-radius:0; margin:0; padding:20px; background:white; animation:none; }
+    .section { opacity:1; transform:none; }
+    .header h1 { -webkit-text-fill-color: #2c3e50; background:none; color:#2c3e50; animation:none; letter-spacing:1px; }
+  }
+
+  /* ── Mobile responsive ── */
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .container { padding: 20px 16px; border-radius: 12px; }
+    .skills-container { grid-template-columns: repeat(2, 1fr); }
+    .contact-info { gap: 8px; font-size: 11px; }
+    .download-btn { padding: 12px 28px; font-size: 14px; }
+  }
+  @media (max-width: 400px) {
+    .skills-container { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { letter-spacing: 1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating particles -->
+<div id="particles"></div>
+
+<div class="button-container">
+  <button class="download-btn" onclick="window.print()">📥 Download PDF</button>
+</div>
+
+<div class="container">
+  <div id="resumeContent">
+
+    <div class="header">
+      <p class="tagline">Web Developer &amp; Python Automation</p>
+      <h1>EKTA PANDEY</h1>
+      <div class="contact-info">
+        <a href="mailto:Pandeyekta331@gmail.com">📧 Pandeyekta331@gmail.com</a>
+        <span>|</span>
+        <a href="tel:8896331300">📱 8896331300</a>
+        <span>|</span>
+        <span>📍 Kanpur, Uttar Pradesh</span>
+        <span>|</span>
+        <a href="https://www.linkedin.com/in/ekta-pandey-051b79241" target="_blank">🔗 LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Professional Summary</div>
+      <div class="objective">
+        Entry-level Web Developer with hands-on experience in frontend development and Python automation. Skilled in building responsive websites, basic backend development, and web scraping. Seeking to contribute to real-world projects and grow as a full-stack developer.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="education-item">
+        <div class="degree-title">B.Tech in Computer Science Engineering</div>
+        <div class="college-name">Indus Institute of Management Technology</div>
+        <div class="date">2026</div>
+      </div>
+      <div class="education-item">
+        <div class="degree-title">Diploma</div>
+        <div class="college-name">Government Polytechnic, Kanpur</div>
+        <div class="date">2020</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Work Experience</div>
+      <div class="experience-item">
+        <div class="job-title">Web Developer</div>
+        <div class="company-name">SOFZER Technologies</div>
+        <div class="date">Aug 2025 – Present</div>
+        <div class="description">
+          • Developed responsive web pages using HTML, CSS, Bootstrap<br>
+          • Implemented JavaScript features for form validation &amp; dynamic content<br>
+          • Built Python web scraping scripts (BeautifulSoup, Selenium)
+        </div>
+      </div>
+      <div class="experience-item">
+        <div class="job-title">Full-Stack Developer Intern</div>
+        <div class="company-name">Techpile Technology Pvt. Ltd.</div>
+        <div class="date">8 Months</div>
+        <div class="description">
+          • Developed responsive web pages using HTML, CSS, Bootstrap<br>
+          • Fixed UI bugs and improved layout consistency<br>
+          • Implemented JavaScript features for form validation and dynamic content<br>
+          • Built Python web scraping scripts using BeautifulSoup, Requests, Selenium<br>
+          • Automated data collection and analysis<br>
+          • Assisted in ASP.NET Core MVC backend development with SQL<br>
+          • Contributed to Student Management System and portfolio projects
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <div class="skills-container">
+        <div class="skill-item">HTML</div>
+        <div class="skill-item">CSS</div>
+        <div class="skill-item">JavaScript</div>
+        <div class="skill-item">Bootstrap</div>
+        <div class="skill-item">Python</div>
+        <div class="skill-item">ASP.NET Core</div>
+        <div class="skill-item">SQL/MySQL</div>
+        <div class="skill-item">Git/GitHub</div>
+        <div class="skill-item">Web Scraping</div>
+        <div class="skill-item">BeautifulSoup</div>
+        <div class="skill-item">Selenium</div>
+        <div class="skill-item">Responsive Design</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Projects</div>
+      <div class="project-item">
+        <div class="project-title">Student Management System (ASP.NET Core MVC)</div>
+        <div class="project-desc">
+          • Developed web application with CRUD operations for student records<br>
+          • Integrated SQL database for backend data storage
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-title">E-commerce Product Listing Page</div>
+        <div class="project-desc">
+          • Built responsive product listing page with filters<br>
+          • Added JavaScript interactivity for enhanced user experience
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-title">Personal Portfolio Website</div>
+        <div class="project-desc">
+          • Designed and developed responsive portfolio showcasing skills and projects
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Certifications</div>
+      <div class="cert-item">Full-Stack Developer Internship Certificate – Techpile Technology Pvt. Ltd.</div>
+      <div class="cert-item">Web Development Training Certificate</div>
+      <div class="cert-item">Python Basics Certification</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ── Floating particles ──
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 20 + 6;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*12+8}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    container.appendChild(p);
+  }
+
+  // ── Scroll-triggered section reveal ──
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(s => observer.observe(s));
+
+  // ── Skill items staggered entrance ──
+  const skillItems = document.querySelectorAll('.skill-item');
+  const skillObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      skillItems.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.7)';
+        item.style.transition = `opacity 0.4s ease ${i*0.05}s, transform 0.4s ease ${i*0.05}s`;
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'scale(1)';
+        }, i * 60 + 100);
+      });
+      skillObserver.disconnect();
+    }
+  }, { threshold: 0.2 });
+  if (skillItems.length) skillObserver.observe(skillItems[0].parentElement);
+</script>
+</body>
+</html>
